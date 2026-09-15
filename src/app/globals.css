@@ -11,6 +11,7 @@
   --font-display: var(--font-display);
   --font-heading: var(--font-display);
   --font-script: var(--font-script);
+  --font-hindi: var(--font-hindi);
 
   /* Primary Brand Burgundy Palette (From Visual Reference) */
   --color-burgundy: var(--burgundy);
@@ -122,6 +123,10 @@
 
   .font-script {
     font-family: var(--font-script), cursive;
+  }
+
+  .font-hindi {
+    font-family: var(--font-hindi), "Tiro Devanagari Hindi", "Noto Serif Devanagari", Georgia, serif;
   }
 
   /* Responsive Container Constraints */

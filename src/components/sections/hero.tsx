@@ -73,16 +73,16 @@ export function Hero() {
       </div>
 
       {/* Main Container */}
-      <div className="container-hero relative z-10 pt-6 sm:pt-8 md:pt-10 pb-0 min-h-[580px] lg:min-h-[620px] xl:min-h-[660px] flex flex-col justify-between">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
+      <div className="container-hero relative z-10 pt-4 sm:pt-6 lg:pt-8 pb-0 min-h-[580px] lg:min-h-[620px] xl:min-h-[660px] flex flex-col justify-between">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           
           {/* ============================================== */}
           {/* LEFT COLUMN: Editorial Branding & CTAs         */}
           {/* ============================================== */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center py-4 sm:py-6 lg:py-12 z-20">
-            {/* Expressive Greeting: Namaste, I'm */}
-            <p className="font-script text-3xl sm:text-4xl text-burgundy tracking-wide mb-1 select-none">
-              Namaste, I&apos;m
+          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center my-auto py-2 sm:py-4 lg:py-6 z-20 lg:pl-6 xl:pl-10">
+            {/* Expressive Greeting: नमस्ते, मैं */}
+            <p className="font-hindi text-3xl sm:text-4xl text-burgundy tracking-wide mb-1 select-none">
+              नमस्ते, मैं
             </p>
 
             {/* Main Heading: NIKHIL GUPTA */}
@@ -97,9 +97,9 @@ export function Hero() {
               />
             </div>
 
-            {/* Role Line: ANCHOR • EMCEE • PRESENTER */}
+            {/* Role Line: ANCHOR • EMCEE • ENTERTAINER */}
             <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] text-burgundy uppercase mb-4 sm:mb-5">
-              ANCHOR &nbsp;•&nbsp; EMCEE &nbsp;•&nbsp; PRESENTER
+              ANCHOR &nbsp;•&nbsp; EMCEE &nbsp;•&nbsp; ENTERTAINER
             </p>
 
             {/* Concise Supporting Editorial Paragraph */}

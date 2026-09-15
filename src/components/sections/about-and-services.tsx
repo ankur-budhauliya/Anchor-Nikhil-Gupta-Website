@@ -64,12 +64,12 @@ export function AboutAndServices() {
               />
 
               {/* Portrait Frame */}
-              <div className="relative w-44 sm:w-48 md:w-52 aspect-[3/4] rounded-2xl overflow-hidden border border-white/15 bg-neutral-900/40 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
+              <div className="relative w-52 sm:w-56 md:w-60 aspect-[3/4] rounded-2xl overflow-hidden border border-white/15 bg-neutral-900/40 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
                 <Image
                   src="/images/nikhil-hero.jpg"
                   alt="Nikhil Gupta — Professional Anchor"
                   fill
-                  sizes="(max-width: 640px) 176px, 208px"
+                  sizes="(max-width: 640px) 208px, 240px"
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
                 {/* Luminous Inner Border */}
@@ -127,16 +127,16 @@ export function AboutAndServices() {
           {/* RIGHT SIDE: WHAT I DO (Large White Rounded Container) */}
           {/* ==================================================== */}
           <div className="lg:col-span-7 xl:col-span-7">
-            <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-9 shadow-2xl text-neutral-900 border border-neutral-100">
+            <div className="bg-white rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl text-neutral-900 border border-neutral-100">
               
               {/* Heading */}
-              <div className="text-center mb-7 sm:mb-8">
-                <h3 className="font-sans text-xs sm:text-sm font-bold tracking-[0.25em] text-neutral-900 uppercase">
+              <div className="text-center mb-8 sm:mb-9">
+                <h3 className="font-sans text-xl sm:text-2xl md:text-[26px] font-bold tracking-[0.25em] text-neutral-900 uppercase">
                   WHAT I DO
                 </h3>
                 {/* Gold Accent Line */}
                 <div
-                  className="h-[2.5px] w-10 bg-gold mx-auto mt-2 rounded-full"
+                  className="h-[3.5px] w-14 bg-gold mx-auto mt-3 rounded-full"
                   aria-hidden="true"
                 />
               </div>

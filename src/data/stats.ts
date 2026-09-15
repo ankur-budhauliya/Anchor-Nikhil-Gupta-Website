@@ -43,7 +43,7 @@ export const statsData: StatItem[] = [
   },
   {
     id: "smiles-delivered",
-    value: "♾️",
+    value: "∞",
     label: "Smiles Delivered",
     subtitle: "Countless Memories",
   },
