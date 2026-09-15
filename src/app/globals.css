@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+  --font-script: var(--font-script);
+
+  /* Primary Brand Burgundy Palette (From Visual Reference) */
+  --color-burgundy: var(--burgundy);
+  --color-burgundy-hover: var(--burgundy-hover);
+  --color-burgundy-dark: var(--burgundy-dark);
+  --color-burgundy-light: var(--burgundy-light);
+  --color-burgundy-section: var(--burgundy-section);
+
+  /* Warm Champagne Gold Accent */
+  --color-gold: var(--gold);
+  --color-gold-hover: var(--gold-hover);
+  --color-gold-light: var(--gold-light);
+  --color-gold-foreground: var(--gold-foreground);
+
+  /* Warm Ivory / Editorial White */
+  --color-ivory: var(--ivory);
+
+  /* UI Tokens */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Radius Scale */
+  --radius-xs: calc(var(--radius) * 0.4);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.4);
+}
+
+:root {
+  /* Reference-Faithful Editorial Base */
+  --background: #FDFCF9;
+  --foreground: #1C1917;
+  --card: #FFFFFF;
+  --card-foreground: #1C1917;
+  --popover: #FFFFFF;
+  --popover-foreground: #1C1917;
+
+  /* Burgundy Brand Colors */
+  --burgundy: #7E1926;
+  --burgundy-hover: #67121D;
+  --burgundy-dark: #4F0B15;
+  --burgundy-light: #9B2433;
+  --burgundy-section: #6B1221;
+
+  --primary: #7E1926;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F5F0;
+  --secondary-foreground: #7E1926;
+  --muted: #F3F1EC;
+  --muted-foreground: #78716C;
+  --accent: #D4AF37;
+  --accent-foreground: #1C1917;
+  --destructive: #DC2626;
+  --border: #EAE6DF;
+  --input: #EAE6DF;
+  --ring: #7E1926;
+
+  --gold: #D4AF37;
+  --gold-hover: #C29F2B;
+  --gold-light: #F3E5AB;
+  --gold-foreground: #1C1917;
+  --ivory: #FDFCF9;
+
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+  h1, h2, h3 {
+    font-family: var(--font-display), Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Strategic Section & Reference-Specific Utilities */
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans), system-ui, sans-serif;
+  }
+
+  .font-script {
+    font-family: var(--font-script), cursive;
+  }
+
+  /* Responsive Container Constraints */
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .container-hero {
+    @apply w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-10;
+  }
+
+  /* Subtle Dot Matrix Pattern for Editorial Edge */
+  .bg-dot-pattern {
+    background-image: radial-gradient(rgba(126, 25, 38, 0.15) 1.5px, transparent 1.5px);
+    background-size: 16px 16px;
+  }
+
+  /* Rich Burgundy Section Styling */
+  .bg-burgundy-section {
+    background-color: var(--burgundy-section);
+  }
+
+  /* Subtle Warm Gold Glow for CTAs */
+  .burgundy-glow {
+    box-shadow: 0 4px 20px -2px rgba(126, 25, 38, 0.35);
+  }
+}
