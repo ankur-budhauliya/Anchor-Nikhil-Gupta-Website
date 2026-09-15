@@ -62,47 +62,47 @@ function CategoryCard({ category, itemCount, onSelect }: CategoryCardProps) {
     <motion.div
       variants={fadeInUp}
       onClick={onSelect}
-      className="group relative flex flex-col justify-end aspect-[16/10] sm:aspect-[16/9] rounded-3xl overflow-hidden bg-neutral-900 border border-white/15 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 hover:border-gold/50 cursor-pointer"
+      className="group relative flex flex-col justify-end aspect-[4/5] rounded-3xl overflow-hidden bg-neutral-900 border border-white/15 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 hover:border-gold/50 cursor-pointer"
     >
       {/* Background Image Preview */}
       <Image
         src={category.previewImage}
         alt={`${category.label} Collection Preview`}
         fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 50vw"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
       />
 
       {/* Dark Ambient Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/20" />
 
       {/* Video Count Pill Badge */}
-      <div className="absolute top-4 right-4 z-10">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold tracking-wide text-white bg-black/60 backdrop-blur-xs border border-white/20 shadow-sm">
-          <Film className="size-3.5 text-gold" />
+      <div className="absolute top-3.5 right-3.5 z-10">
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide text-white bg-black/60 backdrop-blur-xs border border-white/20 shadow-sm">
+          <Film className="size-3 text-gold" />
           <span>{itemCount} {itemCount === 1 ? "Video" : "Videos"}</span>
         </span>
       </div>
 
       {/* Card Content Overlay */}
-      <div className="relative z-10 p-6 sm:p-8 flex flex-col justify-end text-white">
-        <div className="flex items-center gap-2 mb-1.5">
-          <Video className="size-4 text-gold shrink-0" />
-          <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
-            Video Collection
+      <div className="relative z-10 p-5 sm:p-6 flex flex-col justify-end text-white">
+        <div className="flex items-center gap-1.5 mb-1">
+          <Video className="size-3.5 text-gold shrink-0" />
+          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gold">
+            Collection
           </span>
         </div>
 
-        <h3 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight">
+        <h3 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug">
           {category.label}
         </h3>
 
-        <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-sans mt-1 mb-4 max-w-md">
+        <p className="text-xs text-neutral-300 leading-relaxed font-sans mt-1 mb-3 line-clamp-2">
           {category.subtitle}
         </p>
 
         {/* Explore Link */}
-        <div className="pt-3 border-t border-white/15 flex items-center justify-between">
+        <div className="pt-2.5 border-t border-white/15 flex items-center justify-between">
           <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-gold group-hover:text-gold-hover transition-colors gap-1.5">
             <span>EXPLORE</span>
             <ArrowRight className="size-3.5 text-gold transition-transform duration-200 group-hover:translate-x-1" />
@@ -565,15 +565,15 @@ export function ReelsSection() {
           </p>
         </div>
 
-        {/* CONDITIONAL RENDER: 4 Category Cards Grid OR Selected Category Reel Viewer */}
+        {/* CONDITIONAL RENDER: 4 Category Cards 4x1 Horizontal Desktop Grid OR Selected Category Reel Viewer */}
         {!selectedCategory ? (
-          /* View 1: 4 Category Cards 2x2 Grid Overview */
+          /* View 1: 4 Category Cards 4x1 Desktop Grid Overview */
           <motion.div
             ref={containerRef}
             variants={staggerContainer}
             initial="hidden"
             animate={animateState}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8 items-stretch max-w-5xl mx-auto mb-12"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 items-stretch max-w-7xl mx-auto mb-12"
           >
             {videoCategoriesData.map((catConfig) => {
               const count = videoItemsData.filter((v) => v.category === catConfig.id).length
