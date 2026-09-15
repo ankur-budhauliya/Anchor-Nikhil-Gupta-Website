@@ -4,6 +4,7 @@ import { AboutAndServices } from "@/components/sections/about-and-services"
 import { Stats } from "@/components/sections/stats"
 import { Events } from "@/components/sections/events"
 import { GallerySection } from "@/components/sections/gallery-section"
+import { ReelsSection } from "@/components/sections/reels-section"
 
 export default function Home() {
   return (
@@ -27,10 +28,14 @@ export default function Home() {
 
         {/* Categorized Gallery Section */}
         <GallerySection />
+
+        {/* Instagram-Inspired Reels & Video Highlights */}
+        <ReelsSection />
       </main>
     </div>
   )
 }
+
 
 
 
