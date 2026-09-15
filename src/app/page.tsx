@@ -2,6 +2,8 @@ import { Navbar } from "@/components/layout/navbar"
 import { Hero } from "@/components/sections/hero"
 import { AboutAndServices } from "@/components/sections/about-and-services"
 import { Stats } from "@/components/sections/stats"
+import { Events } from "@/components/sections/events"
+import { GallerySection } from "@/components/sections/gallery-section"
 
 export default function Home() {
   return (
@@ -19,8 +21,16 @@ export default function Home() {
 
         {/* Statistics & Credibility Strip */}
         <Stats />
+
+        {/* Event Categories Directory */}
+        <Events />
+
+        {/* Categorized Gallery Section */}
+        <GallerySection />
       </main>
     </div>
   )
 }
+
+
 
