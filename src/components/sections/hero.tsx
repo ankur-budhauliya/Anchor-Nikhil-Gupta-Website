@@ -15,9 +15,9 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      {/* Right Side Burgundy Brushstroke & Texture Background */}
+      {/* Desktop & Tablet: Right Side Burgundy Brushstroke & Stage Texture Background */}
       <div
-        className="absolute top-0 right-0 bottom-0 w-full lg:w-[52%] xl:w-[50%] pointer-events-none overflow-hidden"
+        className="hidden md:block absolute top-0 right-0 bottom-0 md:w-[46%] lg:w-[52%] xl:w-[50%] pointer-events-none overflow-hidden"
         aria-hidden="true"
       >
         {/* Organic Brush Splash SVG Layer */}
@@ -73,53 +73,53 @@ export function Hero() {
       </div>
 
       {/* Main Container */}
-      <div className="container-hero relative z-10 pt-4 sm:pt-6 lg:pt-8 pb-0 min-h-[580px] lg:min-h-[620px] xl:min-h-[660px] flex flex-col justify-between">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center">
+      <div className="container-hero relative z-10 pt-4 sm:pt-6 md:pt-6 lg:pt-8 pb-0 min-h-0 md:min-h-[540px] lg:min-h-[620px] xl:min-h-[660px] flex flex-col justify-between">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-0 md:gap-6 lg:gap-6 items-center">
           
           {/* ============================================== */}
           {/* LEFT COLUMN: Editorial Branding & CTAs         */}
           {/* ============================================== */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center my-auto py-2 sm:py-4 lg:py-6 z-20 lg:pl-6 xl:pl-10">
+          <div className="md:col-span-7 lg:col-span-6 xl:col-span-6 flex flex-col justify-center pt-2 pb-6 sm:pt-4 sm:pb-6 md:py-6 lg:py-6 z-20 md:pl-2 lg:pl-6 xl:pl-10">
             {/* Expressive Greeting: नमस्ते, मैं */}
-            <p className="font-hindi text-3xl sm:text-4xl text-burgundy tracking-wide mb-1 select-none">
+            <p className="font-hindi text-xl xs:text-2xl sm:text-3xl md:text-3xl lg:text-4xl text-burgundy tracking-wide mb-1.5 sm:mb-2 select-none">
               नमस्ते, मैं
             </p>
 
             {/* Main Heading: NIKHIL GUPTA */}
             <div className="relative">
-              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-neutral-900 leading-[1.08]">
+              <h1 className="font-display text-[38px] xs:text-[44px] sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-neutral-900 leading-[1.08] mb-2">
                 NIKHIL GUPTA
               </h1>
-              {/* Gold Accent Line beneath the initial */}
+              {/* Gold Accent Line beneath the heading */}
               <div
-                className="h-[3.5px] w-14 sm:w-16 bg-gradient-to-r from-gold to-gold-hover rounded-full mt-2 sm:mt-2.5 mb-3.5 sm:mb-4"
+                className="h-[3px] sm:h-[3.5px] w-14 sm:w-16 bg-gradient-to-r from-gold to-gold-hover rounded-full mt-1.5 sm:mt-2 mb-3 sm:mb-3.5"
                 aria-hidden="true"
               />
             </div>
 
             {/* Role Line: ANCHOR • EMCEE • ENTERTAINER */}
-            <p className="text-xs sm:text-sm font-semibold tracking-[0.25em] text-burgundy uppercase mb-4 sm:mb-5">
+            <p className="text-xs xs:text-[13px] sm:text-sm md:text-sm font-semibold tracking-[0.18em] xs:tracking-[0.2em] sm:tracking-[0.25em] text-burgundy uppercase mb-3 sm:mb-3.5">
               ANCHOR &nbsp;•&nbsp; EMCEE &nbsp;•&nbsp; ENTERTAINER
             </p>
 
             {/* Concise Supporting Editorial Paragraph */}
-            <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-lg mb-8 sm:mb-9 font-sans">
+            <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-sm sm:max-w-md lg:max-w-lg mb-6 sm:mb-7 lg:mb-8 font-sans">
               From grand celebrations to corporate stages, I bring energy,
               elegance and emotion to every moment I host.
             </p>
 
-            {/* Two Responsive CTAs matching the reference */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4">
+            {/* Two Responsive CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-3 w-full sm:w-auto max-w-md sm:max-w-none">
               {/* Primary CTA: Book Me for Your Event */}
               <Button
                 asChild
                 variant="bookNow"
                 size="lg"
-                className="rounded-lg px-6 py-3.5 text-sm sm:text-base font-semibold tracking-wide justify-center shadow-md hover:shadow-lg"
+                className="rounded-xl px-5 sm:px-6 h-[52px] sm:h-12 md:h-12 text-sm sm:text-base font-semibold tracking-wide justify-center shadow-md hover:shadow-lg"
               >
-                <Link href="#book">
-                  Book Me for Your Event
-                  <ArrowRight className="size-4 ml-2" aria-hidden="true" />
+                <Link href="/book-now">
+                  <span>Book Me for Your Event</span>
+                  <ArrowRight className="size-4 ml-2 shrink-0" aria-hidden="true" />
                 </Link>
               </Button>
 
@@ -128,10 +128,10 @@ export function Hero() {
                 asChild
                 variant="burgundyOutline"
                 size="lg"
-                className="rounded-lg px-5 py-3.5 text-sm sm:text-base font-semibold justify-center"
+                className="rounded-xl px-5 sm:px-5 h-[52px] sm:h-12 md:h-12 text-sm sm:text-base font-semibold justify-center"
               >
-                <Link href="#videos">
-                  Watch Showreel
+                <Link href="/videos">
+                  <span>Watch Showreel</span>
                   <span className="flex items-center justify-center size-5 rounded-full border border-burgundy ml-2 shrink-0">
                     <Play className="size-2.5 fill-burgundy text-burgundy ml-0.5" aria-hidden="true" />
                   </span>
@@ -143,19 +143,31 @@ export function Hero() {
           {/* ============================================== */}
           {/* RIGHT COLUMN: Separated Tagline + Cameo Cutout */}
           {/* ============================================== */}
-          <div className="lg:col-span-6 xl:col-span-6 flex flex-col items-center lg:items-end justify-end mt-4 lg:mt-0 relative z-10">
+          <div className="md:col-span-5 lg:col-span-6 xl:col-span-6 flex flex-col items-center md:items-end justify-end mt-8 sm:mt-10 md:mt-0 relative z-10 pt-0 md:pt-0">
+            {/* Mobile Only: Dedicated Burgundy Backdrop with Seamless Flow to About Section */}
+            <div
+              className="md:hidden absolute inset-0 -bottom-[2px] -mx-4 sm:-mx-6 bg-gradient-to-b from-[#8A1829] via-[#741120] to-[#6B1221] rounded-t-[28px] sm:rounded-t-[36px] -z-10 shadow-[0_-12px_24px_-8px_rgba(0,0,0,0.25)] overflow-hidden"
+              aria-hidden="true"
+            >
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage: `radial-gradient(circle at 50% 30%, rgba(255,255,255,0.3) 0%, transparent 65%)`,
+                }}
+              />
+            </div>
             
             {/* Tagline in its OWN dedicated negative space zone ABOVE the cameo */}
-            <div className="w-full flex justify-center lg:justify-end pb-3 sm:pb-4 lg:pb-3 pointer-events-none z-20">
-              <div className="max-w-[280px] sm:max-w-[310px] text-center lg:text-right pr-0 lg:pr-2">
-                <p className="font-script text-2xl sm:text-[26px] lg:text-[26px] xl:text-[28px] text-[#F9EFE3] leading-[1.28] drop-shadow-xs select-none">
+            <div className="w-full flex justify-center md:justify-end pt-6 xs:pt-7 sm:pt-8 md:pt-2 pb-2 sm:pb-3 md:pb-2 pointer-events-none z-20">
+              <div className="max-w-[260px] xs:max-w-[280px] sm:max-w-[300px] md:max-w-[280px] lg:max-w-[320px] text-center md:text-right pr-0 md:pr-2 lg:pr-4">
+                <p className="font-script text-lg xs:text-xl sm:text-2xl md:text-2xl lg:text-[26px] xl:text-[28px] text-[#F9EFE3] leading-[1.25] drop-shadow-xs select-none">
                   &ldquo;It&apos;s not just about hosting.<br />
                   It&apos;s about connecting.&rdquo;
                 </p>
                 {/* Subtle gold flourish curved line underneath */}
                 <svg
                   viewBox="0 0 160 20"
-                  className="w-28 mx-auto lg:ml-auto lg:mr-0 mt-1 text-gold/85"
+                  className="w-24 sm:w-28 mx-auto md:ml-auto md:mr-0 mt-2 sm:mt-2.5 text-gold/85"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.5"
@@ -167,15 +179,20 @@ export function Hero() {
               </div>
             </div>
 
-            {/* Nikhil Gupta Cameo Cutout (Transparent, Natural, Dominant) */}
-            <div className="relative w-full max-w-[380px] sm:max-w-[430px] lg:max-w-[470px] xl:max-w-[510px] aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] z-10 flex items-end justify-center">
+            {/* Nikhil Gupta Cameo Cutout (Substantial scale centered for mobile, tablet, and desktop) */}
+            <div className="relative w-full max-w-[260px] xs:max-w-[285px] sm:max-w-[320px] md:max-w-[340px] lg:max-w-[470px] xl:max-w-[510px] aspect-[4/5] sm:aspect-[4/5] md:aspect-[3/4] lg:aspect-[4/5] z-10 flex items-end justify-center mt-3 sm:mt-4">
               <Image
                 src="/images/nikhil-cutout.png"
                 alt="Nikhil Gupta — Professional Event Anchor and Emcee"
                 fill
                 priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 510px"
+                sizes="(max-width: 480px) 285px, (max-width: 640px) 320px, (max-width: 1024px) 340px, 510px"
                 className="object-contain object-bottom drop-shadow-2xl"
+              />
+              {/* Mobile Only: Subtle bottom feather to soften the straight cut of the cutout into the About section */}
+              <div
+                className="md:hidden absolute inset-x-0 -bottom-[2px] h-10 sm:h-12 bg-gradient-to-t from-[#6B1221] via-[#6B1221]/80 to-transparent pointer-events-none z-20"
+                aria-hidden="true"
               />
             </div>
 

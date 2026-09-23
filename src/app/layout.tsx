@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Plus_Jakarta_Sans, Caveat, Rozha_One } from "next/font/google";
 import "./globals.css";
+import { Footer } from "@/components/layout/footer";
+import { FloatingActions } from "@/components/layout/floating-actions";
 
 const playfair = Playfair_Display({
   variable: "--font-display",
@@ -41,10 +43,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${playfair.variable} ${plusJakarta.variable} ${caveat.variable} ${rozhaOne.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground selection:bg-burgundy/15 selection:text-burgundy">
-        {children}
+        <div className="flex-1 flex flex-col">
+          {children}
+        </div>
+        <Footer />
+        <FloatingActions />
       </body>
     </html>
   );

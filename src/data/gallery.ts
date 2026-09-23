@@ -174,3 +174,11 @@ export const galleryCategoriesData: GalleryCategory[] = [
     ],
   },
 ]
+
+export const allGalleryImages: GalleryImage[] = galleryCategoriesData.flatMap((cat) =>
+  cat.images.map((img) => ({
+    ...img,
+    caption: img.caption || cat.title,
+  }))
+)
+

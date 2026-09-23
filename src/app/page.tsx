@@ -5,6 +5,8 @@ import { Stats } from "@/components/sections/stats"
 import { Events } from "@/components/sections/events"
 import { GallerySection } from "@/components/sections/gallery-section"
 import { ReelsSection } from "@/components/sections/reels-section"
+import { TestimonialsSection } from "@/components/sections/testimonials-section"
+import { FAQSection } from "@/components/sections/faq-section"
 
 export default function Home() {
   return (
@@ -31,6 +33,12 @@ export default function Home() {
 
         {/* Instagram-Inspired Reels & Video Highlights */}
         <ReelsSection />
+
+        {/* Client Video Testimonials & WhatsApp Feedback */}
+        <TestimonialsSection />
+
+        {/* Frequently Asked Questions Accordion */}
+        <FAQSection />
       </main>
     </div>
   )

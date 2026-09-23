@@ -1,11 +1,11 @@
 "use client"
 
 import * as React from "react"
-import Image from "next/image"
+
 import Link from "next/link"
 import { Navbar } from "@/components/layout/navbar"
 import { videoItemsData, videoCategoriesData, VideoCategoryConfig } from "@/data/videos"
-import { ArrowLeft, ArrowRight, Film, Video } from "lucide-react"
+import { ArrowLeft, ArrowRight, Film } from "lucide-react"
 
 function InstagramIcon({ className = "size-4" }: { className?: string }) {
   return (
@@ -19,9 +19,8 @@ function InstagramIcon({ className = "size-4" }: { className?: string }) {
 
 function YoutubeIcon({ className = "size-4" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <polygon points="10 15 15 12 10 9 10 15" fill="currentColor" />
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
     </svg>
   )
 }
@@ -30,49 +29,47 @@ function CategoryCard({ category, itemCount }: { category: VideoCategoryConfig; 
   return (
     <Link
       href={`/videos/${category.slug}`}
-      className="group relative flex flex-col justify-end aspect-[4/5] rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-200 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-burgundy/40"
+      aria-label={`Explore ${category.label} videos`}
+      className="group relative flex flex-col justify-end aspect-[9/16] w-full rounded-3xl overflow-hidden bg-neutral-900 border border-neutral-200/80 shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-burgundy/40"
+      style={{ aspectRatio: "9 / 16" }}
     >
-      {/* Background Image Preview */}
-      <Image
-        src={category.previewImage}
-        alt={`${category.label} Video Collection Preview`}
-        fill
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-        className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+      {/* Background Video Preview — muted, looping, autoplay */}
+      <video
+        src={category.previewVideo}
+        poster={category.previewImage}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+        aria-hidden="true"
       />
 
       {/* Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/15 pointer-events-none" />
 
       {/* Video Count Pill Badge */}
-      <div className="absolute top-3.5 right-3.5 z-10">
-        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide text-white bg-black/60 backdrop-blur-xs border border-white/20 shadow-sm">
-          <Film className="size-3 text-gold" />
+      <div className="absolute top-3.5 right-3.5 z-10 pointer-events-none">
+        <span className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wide text-white bg-black/60 backdrop-blur-xs border border-white/20 shadow-sm">
           <span>{itemCount} {itemCount === 1 ? "Video" : "Videos"}</span>
         </span>
       </div>
 
       {/* Card Content Overlay */}
-      <div className="relative z-10 p-5 sm:p-6 flex flex-col justify-end text-white">
-        <div className="flex items-center gap-1.5 mb-1">
-          <Video className="size-3.5 text-gold shrink-0" />
-          <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gold">
-            Collection
-          </span>
-        </div>
-
-        <h2 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-white leading-snug">
+      <div className="relative z-10 p-4 sm:p-5 flex flex-col justify-end text-white pointer-events-none">
+        <h2 className="font-display text-lg sm:text-xl font-bold tracking-tight text-white leading-snug">
           {category.label}
         </h2>
 
-        <p className="text-xs text-neutral-300 leading-relaxed font-sans mt-1 mb-3 line-clamp-2">
+        <p className="text-xs text-neutral-300 leading-relaxed font-sans mt-1 mb-2.5 line-clamp-2">
           {category.subtitle}
         </p>
 
         {/* Explore Link */}
-        <div className="pt-2.5 border-t border-white/15 flex items-center justify-between">
+        <div className="pt-2 border-t border-white/15 flex items-center justify-between">
           <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-gold group-hover:text-gold-hover transition-colors gap-1.5">
-            <span>EXPLORE COLLECTION</span>
+            <span>EXPLORE</span>
             <ArrowRight className="size-3.5 text-gold transition-transform duration-200 group-hover:translate-x-1" />
           </span>
         </div>
@@ -117,12 +114,12 @@ export default function VideosPage() {
             </p>
             <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-semibold text-neutral-700">
               <Film className="size-4 text-gold" />
-              <span>{totalVideosCount} Videos Across {videoCategoriesData.length} Collections</span>
+              <span>{totalVideosCount} Videos Across {videoCategoriesData.length} Categories</span>
             </div>
           </div>
 
-          {/* 4 Category Cards 4x1 Horizontal Desktop Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 items-stretch max-w-7xl mx-auto mb-16">
+          {/* 4 Category Cards: 1-col on Mobile, 2x2 on Tablet, 4x1 on Desktop */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5 lg:gap-5 xl:gap-6 max-w-[320px] sm:max-w-2xl md:max-w-3xl lg:max-w-6xl mx-auto mb-16">
             {videoCategoriesData.map((category: VideoCategoryConfig) => {
               const count = videoItemsData.filter((v) => v.category === category.id).length
               return <CategoryCard key={category.id} category={category} itemCount={count} />

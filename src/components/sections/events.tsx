@@ -14,11 +14,13 @@ interface CategoryCardProps {
   index: number
 }
 
-function CategoryCard({ category }: CategoryCardProps) {
+function CategoryCard({ category, index }: CategoryCardProps) {
+  const tabletSpanClass = index === 2 ? "md:col-span-2 lg:col-span-1 md:max-w-lg md:mx-auto lg:max-w-none w-full" : ""
+
   return (
     <motion.div
       variants={fadeInUp}
-      className="flex flex-col h-full rounded-2xl bg-white border border-neutral-200/80 shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 group"
+      className={`flex flex-col h-full rounded-2xl bg-white border border-neutral-200/80 shadow-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1.5 group ${tabletSpanClass}`}
     >
       {/* Category Photography Header */}
       <div className="relative w-full aspect-[4/3] overflow-hidden bg-neutral-900">
@@ -130,15 +132,9 @@ export function Events() {
 
           {/* Gold Accent Line */}
           <div
-            className="h-[3px] w-14 bg-gold mx-auto mt-3.5 mb-4 rounded-full"
+            className="h-[3px] w-14 bg-gold mx-auto mt-3.5 rounded-full"
             aria-hidden="true"
           />
-
-          {/* Concise Supporting Description */}
-          <p className="text-neutral-600 text-sm sm:text-base leading-relaxed font-sans max-w-2xl mx-auto">
-            From high-energy destination weddings and grand celebrations to prestigious corporate summits
-            and cultural fests, Nikhil Gupta brings charisma, elegance, and unforgettable stage presence.
-          </p>
         </div>
 
         {/* 3 Primary Category Cards Grid */}

@@ -66,11 +66,12 @@ export function AboutAndServices() {
               {/* Portrait Frame */}
               <div className="relative w-52 sm:w-56 md:w-60 aspect-[3/4] rounded-2xl overflow-hidden border border-white/15 bg-neutral-900/40 shadow-2xl transition-transform duration-300 group-hover:scale-[1.02]">
                 <Image
-                  src="/images/nikhil-hero.jpg"
+                  src="/images/079A7448~2.JPG"
                   alt="Nikhil Gupta — Professional Anchor"
                   fill
                   sizes="(max-width: 640px) 208px, 240px"
                   className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  priority
                 />
                 {/* Luminous Inner Border */}
                 <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-white/15 pointer-events-none" />

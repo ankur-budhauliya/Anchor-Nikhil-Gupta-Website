@@ -17,6 +17,7 @@ export interface VideoCategoryConfig {
   folder: string
   subtitle: string
   previewImage: string
+  previewVideo: string
 }
 
 export const videoCategoriesData: VideoCategoryConfig[] = [
@@ -27,6 +28,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     folder: "VIDEOS/GAMES/",
     subtitle: "Playful audience interactions & stage games",
     previewImage: "/images/PHOTOS/2%20Birthday/079A7821.JPG",
+    previewVideo: "/images/VIDEOS/GAMES/A.mp4",
   },
   {
     id: "reels",
@@ -35,6 +37,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     folder: "VIDEOS/REELS/",
     subtitle: "High-voltage stage entries & event highlights",
     previewImage: "/images/PHOTOS/4%20SANGEET/IMG_8139.JPG",
+    previewVideo: "/images/VIDEOS/REELS/55.mp4",
   },
   {
     id: "testimonials",
@@ -43,6 +46,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     folder: "VIDEOS/TESTIMONIALS/",
     subtitle: "Client & organizer video feedback",
     previewImage: "/images/PHOTOS/3%20Engagement/976A4564.JPG",
+    previewVideo: "/images/VIDEOS/TESTIMONIALS/1.mp4",
   },
   {
     id: "uwi",
@@ -51,6 +55,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     folder: "VIDEOS/UWI/",
     subtitle: "Unique wedding ideas & signature concepts",
     previewImage: "/images/PHOTOS/5%20Varmala/019A2608.JPG",
+    previewVideo: "/images/VIDEOS/UWI/UWI%203%20Signature%20Reel.mp4",
   },
 ]
 
@@ -193,6 +198,14 @@ export const videoItemsData: VideoItem[] = [
     src: "/images/VIDEOS/GAMES/L.mp4",
     aspectRatio: "vertical",
   },
+  {
+    id: "game-10",
+    title: "Stage Entertainment K",
+    subtitle: "Crowd Celebration",
+    category: "games",
+    src: "/images/VIDEOS/GAMES/K.mp4",
+    aspectRatio: "vertical",
+  },
 
   // 3. TESTIMONIALS Category (VIDEOS/TESTIMONIALS/)
   {
@@ -315,6 +328,22 @@ export const videoItemsData: VideoItem[] = [
     subtitle: "UWI Highlight 7",
     category: "uwi",
     src: "/images/VIDEOS/UWI/UWI%207%20photo%20wall.mp4",
+    aspectRatio: "vertical",
+  },
+  {
+    id: "uwi-4",
+    title: "Wedding Logo Concept",
+    subtitle: "UWI Highlight 2",
+    category: "uwi",
+    src: "/images/VIDEOS/UWI/UWI%202%20Wedding%20Logo.mp4",
+    aspectRatio: "vertical",
+  },
+  {
+    id: "uwi-5",
+    title: "Caricature Cutout Concept",
+    subtitle: "UWI Highlight 6",
+    category: "uwi",
+    src: "/images/VIDEOS/UWI/UWI%206%20Caricature%20cutout.mp4",
     aspectRatio: "vertical",
   },
 ]

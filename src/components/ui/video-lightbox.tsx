@@ -26,14 +26,41 @@ export function VideoLightbox({
   const [isPlaying, setIsPlaying] = React.useState(true)
   const [isMuted, setIsMuted] = React.useState(false)
 
+  // Auto-play active video with sound when opened or navigated
+  React.useEffect(() => {
+    if (!isOpen) return
+
+    const videoElem = videoRef.current
+    if (videoElem) {
+      videoElem.muted = isMuted
+      if (!isMuted) {
+        videoElem.volume = 1
+      }
+      const playPromise = videoElem.play()
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          if (videoElem && !videoElem.muted) {
+            videoElem.muted = true
+            setIsMuted(true)
+            videoElem.play().catch(() => {})
+          }
+        })
+      }
+    }
+  }, [currentIndex, isOpen, isMuted])
+
   const handlePrevious = React.useCallback(() => {
     if (videos.length === 0) return
+    setIsMuted(false)
+    setIsPlaying(true)
     const prevIndex = (currentIndex - 1 + videos.length) % videos.length
     onNavigate(prevIndex)
   }, [currentIndex, videos.length, onNavigate])
 
   const handleNext = React.useCallback(() => {
     if (videos.length === 0) return
+    setIsMuted(false)
+    setIsPlaying(true)
     const nextIndex = (currentIndex + 1) % videos.length
     onNavigate(nextIndex)
   }, [currentIndex, videos.length, onNavigate])

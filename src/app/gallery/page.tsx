@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { Navbar } from "@/components/layout/navbar"
 import { galleryCategoriesData, GalleryCategory } from "@/data/gallery"
-import { ArrowLeft, Folder, Images, ArrowRight } from "lucide-react"
+import { ArrowLeft, Images, ArrowRight } from "lucide-react"
 
 export default function GalleryPage() {
   const totalPhotosCount = React.useMemo(() => {
@@ -41,9 +41,18 @@ export default function GalleryPage() {
             <p className="text-neutral-600 text-sm sm:text-base leading-relaxed font-sans">
               Select any event category below to view full-resolution photographs organized by ceremony, event type, and publicity creative.
             </p>
-            <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-semibold text-neutral-700">
-              <Images className="size-4 text-gold" />
-              <span>{totalPhotosCount} Photographs Across {galleryCategoriesData.length} Collections</span>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-semibold text-neutral-700">
+                <Images className="size-4 text-gold" />
+                <span>{totalPhotosCount} Photographs Across {galleryCategoriesData.length} Categories</span>
+              </div>
+              <Link
+                href="/gallery/all"
+                className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-burgundy hover:bg-burgundy-hover text-xs font-bold uppercase tracking-wider text-white transition-colors shadow-sm"
+              >
+                <span>View All Photos</span>
+                <ArrowRight className="size-3.5 text-gold" />
+              </Link>
             </div>
           </div>
 
@@ -82,12 +91,6 @@ export default function GalleryPage() {
 
                     {/* Title overlay at bottom of cover */}
                     <div className="absolute bottom-4 left-4 right-4 z-10 text-white">
-                      <div className="flex items-center gap-2 mb-1">
-                        <Folder className="size-4 text-gold shrink-0 fill-gold/20" />
-                        <span className="text-[11px] font-bold uppercase tracking-wider text-gold">
-                          Collection
-                        </span>
-                      </div>
                       <h2 className="font-display text-2xl font-bold tracking-tight text-white leading-tight">
                         {category.title}
                       </h2>
