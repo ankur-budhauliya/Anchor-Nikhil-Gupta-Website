@@ -121,3 +121,64 @@ export function buildWhatsAppEnquiryUrl(params: WhatsAppEnquiryParams): string {
   return `https://wa.me/919170165570?text=${encodeURIComponent(message)}`
 }
 
+export interface WhatsAppBookingParams {
+  fullName: string
+  phone: string
+  email: string
+  eventType: string
+  eventDate: string
+  eventLocation: string
+  guestCount?: string
+  additionalDetails?: string
+}
+
+export function formatBookingDate(dateStr: string): string {
+  if (!dateStr) return "Not specified"
+  try {
+    const [year, month, day] = dateStr.split("-").map(Number)
+    if (year && month && day) {
+      const date = new Date(year, month - 1, day)
+      if (!isNaN(date.getTime())) {
+        return date.toLocaleDateString("en-IN", {
+          day: "numeric",
+          month: "short",
+          year: "numeric",
+        })
+      }
+    }
+    return dateStr
+  } catch {
+    return dateStr
+  }
+}
+
+export function buildWhatsAppBookingMessage(params: WhatsAppBookingParams): string {
+  const formattedDate = formatBookingDate(params.eventDate)
+  const audience = params.guestCount?.trim() ? params.guestCount.trim() : "Not specified"
+  const notes = params.additionalDetails?.trim() ? params.additionalDetails.trim() : "None"
+
+  return [
+    "New Booking Inquiry — Nikhil Gupta",
+    "",
+    `Name: ${params.fullName.trim()}`,
+    `Phone: ${params.phone.trim()}`,
+    `Email: ${params.email.trim()}`,
+    `Event Type: ${params.eventType.trim()}`,
+    `Event Date: ${formattedDate}`,
+    `Location: ${params.eventLocation.trim()}`,
+    `Expected Audience: ${audience}`,
+    `Additional Notes: ${notes}`,
+    "",
+    "Please confirm availability and provide the next steps.",
+  ].join("\n")
+}
+
+export function buildWhatsAppBookingUrl(params: WhatsAppBookingParams): string {
+  const message = buildWhatsAppBookingMessage(params)
+  const phone = (
+    process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || contactConfig.whatsapp.number
+  ).replace(/\D/g, "")
+  return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`
+}
+
+
