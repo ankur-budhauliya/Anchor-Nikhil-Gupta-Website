@@ -20,7 +20,6 @@ import {
   Heart,
   Share2,
   Bookmark,
-  Music,
   Check,
   Sparkles,
   Film,
@@ -320,26 +319,6 @@ function ReelCard({
         )}
       </div>
 
-      {/* Bottom Information Overlay */}
-      <div className="absolute bottom-3.5 left-3.5 right-14 z-30 text-white pointer-events-none">
-        <p className="font-display text-sm sm:text-base font-bold text-white tracking-tight leading-snug drop-shadow-md">
-          {reel.title}
-        </p>
-
-        {reel.subtitle && (
-          <p className="font-sans text-[11px] text-gold font-semibold tracking-wide mt-0.5">
-            {reel.subtitle}
-          </p>
-        )}
-
-        <div className="flex items-center gap-1.5 mt-2 text-[10px] font-medium text-neutral-300 bg-black/40 backdrop-blur-xs px-2.5 py-1 rounded-full w-fit border border-white/10">
-          <Music className="size-3 text-gold animate-pulse" />
-          <span className="truncate max-w-[140px] sm:max-w-[170px]">
-            ♪ Event Audio • Anchor Nikhil Gupta
-          </span>
-        </div>
-      </div>
-
       {/* Bottom Video Progress Bar */}
       <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/20 overflow-hidden z-30 pointer-events-none">
         <div
@@ -579,7 +558,7 @@ export default function CategoryVideoPage() {
               {categoryConfig.label} Reels Feed
             </h1>
             <p className="text-neutral-300 text-xs sm:text-sm font-sans mt-1">
-              {categoryConfig.subtitle} • Scroll or swipe vertically
+              Scroll or swipe vertically
             </p>
           </div>
 

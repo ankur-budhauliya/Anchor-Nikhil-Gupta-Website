@@ -15,7 +15,7 @@ export interface VideoCategoryConfig {
   slug: string
   label: string
   folder: string
-  subtitle: string
+  subtitle?: string
   previewImage: string
   previewVideo: string
 }
@@ -26,7 +26,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     slug: "games",
     label: "Games",
     folder: "VIDEOS/GAMES/",
-    subtitle: "Playful audience interactions & stage games",
+    subtitle: "",
     previewImage: "/images/PHOTOS/2%20Birthday/079A7821.JPG",
     previewVideo: "/images/VIDEOS/GAMES/A.mp4",
   },
@@ -35,7 +35,7 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     slug: "reels",
     label: "Reels",
     folder: "VIDEOS/REELS/",
-    subtitle: "High-voltage stage entries & event highlights",
+    subtitle: "",
     previewImage: "/images/PHOTOS/4%20SANGEET/IMG_8139.JPG",
     previewVideo: "/images/VIDEOS/REELS/55.mp4",
   },
@@ -44,16 +44,16 @@ export const videoCategoriesData: VideoCategoryConfig[] = [
     slug: "testimonials",
     label: "Testimonials",
     folder: "VIDEOS/TESTIMONIALS/",
-    subtitle: "Client & organizer video feedback",
+    subtitle: "",
     previewImage: "/images/PHOTOS/3%20Engagement/976A4564.JPG",
     previewVideo: "/images/VIDEOS/TESTIMONIALS/1.mp4",
   },
   {
     id: "uwi",
     slug: "uwi",
-    label: "UWI",
+    label: "Unique Wedding Ideas",
     folder: "VIDEOS/UWI/",
-    subtitle: "Unique wedding ideas & signature concepts",
+    subtitle: "",
     previewImage: "/images/PHOTOS/5%20Varmala/019A2608.JPG",
     previewVideo: "/images/VIDEOS/UWI/UWI%203%20Signature%20Reel.mp4",
   },

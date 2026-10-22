@@ -62,12 +62,8 @@ function CategoryCard({ category, itemCount }: { category: VideoCategoryConfig; 
           {category.label}
         </h2>
 
-        <p className="text-xs text-neutral-300 leading-relaxed font-sans mt-1 mb-2.5 line-clamp-2">
-          {category.subtitle}
-        </p>
-
         {/* Explore Link */}
-        <div className="pt-2 border-t border-white/15 flex items-center justify-between">
+        <div className="pt-2.5 mt-2.5 border-t border-white/15 flex items-center justify-between">
           <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-gold group-hover:text-gold-hover transition-colors gap-1.5">
             <span>EXPLORE</span>
             <ArrowRight className="size-3.5 text-gold transition-transform duration-200 group-hover:translate-x-1" />
@@ -110,7 +106,7 @@ export default function VideosPage() {
             </h1>
             <div className="h-[3px] w-16 bg-gold mx-auto mt-4 mb-4 rounded-full" />
             <p className="text-neutral-600 text-sm sm:text-base leading-relaxed font-sans">
-              Explore video collections by selecting an event folder below: Games, Reels, Testimonials, and UWI highlights.
+              Explore video collections by selecting an event folder below: Games, Reels, Testimonials, and Unique Wedding Ideas.
             </p>
             <div className="mt-4 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neutral-100 border border-neutral-200 text-xs font-semibold text-neutral-700">
               <Film className="size-4 text-gold" />

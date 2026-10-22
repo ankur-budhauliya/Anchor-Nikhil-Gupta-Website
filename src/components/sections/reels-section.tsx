@@ -73,12 +73,8 @@ function CategoryCard({ category, itemCount }: CategoryCardProps) {
             {category.label}
           </h3>
 
-          <p className="text-xs text-neutral-300 leading-relaxed font-sans mt-1 mb-2.5 line-clamp-2">
-            {category.subtitle}
-          </p>
-
           {/* Explore Link */}
-          <div className="pt-2 border-t border-white/15 flex items-center justify-between">
+          <div className="pt-2.5 mt-2.5 border-t border-white/15 flex items-center justify-between">
             <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-gold group-hover:text-gold-hover transition-colors gap-1.5">
               <span>EXPLORE</span>
               <ArrowRight className="size-3.5 text-gold transition-transform duration-200 group-hover:translate-x-1" />

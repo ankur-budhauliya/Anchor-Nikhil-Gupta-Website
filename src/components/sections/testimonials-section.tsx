@@ -19,6 +19,11 @@ import {
 import { cinematicEase } from "@/lib/animations"
 import type { Variants } from "motion/react"
 
+// Auto-advance interval: 5.5 seconds (within the 5–6 seconds requirement)
+const AUTOPLAY_INTERVAL_MS = 5500
+// Resume delay after user interaction ceases: 5.5 seconds
+const RESUME_DELAY_MS = 5500
+
 export function TestimonialsSection() {
   const containerRef = React.useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-60px" })
@@ -26,64 +31,85 @@ export function TestimonialsSection() {
 
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [direction, setDirection] = React.useState<"left" | "right">("right")
-  const [isPaused, setIsPaused] = React.useState(false)
-  const resumeTimerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const [isHovered, setIsHovered] = React.useState(false)
+  const [isInteracting, setIsInteracting] = React.useState(false)
 
   const total = writtenTestimonialsData.length
+  const resumeTimerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const rotationTimerRef = React.useRef<NodeJS.Timeout | null>(null)
 
+  // Clear timers safely on unmount
+  React.useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+      if (rotationTimerRef.current) clearTimeout(rotationTimerRef.current)
+    }
+  }, [])
+
+  // Advance to next testimonial with continuous wrap-around loop
   const handleNext = React.useCallback(() => {
     setDirection("right")
     setCurrentIndex((prev) => (prev + 1) % total)
   }, [total])
 
+  // Move to previous testimonial with continuous wrap-around loop
   const handlePrev = React.useCallback(() => {
     setDirection("left")
     setCurrentIndex((prev) => (prev - 1 + total) % total)
   }, [total])
 
-  // Temporarily pause autoplay when user manually interacts, then resume after delay
-  const pauseAndResumeAfter = React.useCallback((delayMs = 7000) => {
-    setIsPaused(true)
+  // Mark user interaction and pause autoplay, then resume after short delay (5.5s)
+  const markInteraction = React.useCallback(() => {
+    setIsInteracting(true)
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current)
     }
     resumeTimerRef.current = setTimeout(() => {
-      setIsPaused(false)
-    }, delayMs)
+      setIsInteracting(false)
+    }, RESUME_DELAY_MS)
   }, [])
 
-  // Manual navigation handlers that pause autoplay temporarily
+  // Manual Next click (resets rotation timer)
   const onManualNext = () => {
     handleNext()
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
+  // Manual Prev click (resets rotation timer)
   const onManualPrev = () => {
     handlePrev()
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
+  // Direct dot click (resets rotation timer)
   const onSelectIndex = (idx: number) => {
+    if (idx === currentIndex) return
     setDirection(idx > currentIndex ? "right" : "left")
     setCurrentIndex(idx)
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
-  // 5.5s gentle auto-rotation loop
+  // Automatic rotation: schedules next slide every 5.5s when in view and not paused by user
   React.useEffect(() => {
-    if (isPaused || !isInView) return
-    const timer = setInterval(() => {
-      handleNext()
-    }, 5500)
-    return () => clearInterval(timer)
-  }, [isPaused, isInView, handleNext])
-
-  // Clean up any pending resume timer on unmount
-  React.useEffect(() => {
-    return () => {
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    if (!isInView || isHovered || isInteracting) {
+      if (rotationTimerRef.current) {
+        clearTimeout(rotationTimerRef.current)
+        rotationTimerRef.current = null
+      }
+      return
     }
-  }, [])
+
+    rotationTimerRef.current = setTimeout(() => {
+      handleNext()
+    }, AUTOPLAY_INTERVAL_MS)
+
+    return () => {
+      if (rotationTimerRef.current) {
+        clearTimeout(rotationTimerRef.current)
+        rotationTimerRef.current = null
+      }
+    }
+  }, [currentIndex, isInView, isHovered, isInteracting, handleNext])
 
   // Mobile Touch Swipe Handlers
   const touchStartX = React.useRef<number | null>(null)
@@ -92,7 +118,7 @@ export function TestimonialsSection() {
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
     touchStartY.current = e.touches[0].clientY
-    setIsPaused(true)
+    markInteraction()
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -102,7 +128,7 @@ export function TestimonialsSection() {
       const diffX = touchStartX.current - touchEndX
       const diffY = touchStartY.current - touchEndY
 
-      // Check if horizontal swipe is intentional (>40px and dominant over vertical scroll)
+      // Horizontal swipe detection (>40px and dominant over vertical scroll)
       if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
         if (diffX > 0) {
           handleNext()
@@ -113,7 +139,7 @@ export function TestimonialsSection() {
     }
     touchStartX.current = null
     touchStartY.current = null
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
   const currentItem: WrittenTestimonial = writtenTestimonialsData[currentIndex]
@@ -121,7 +147,7 @@ export function TestimonialsSection() {
   // Slide / fade animation variants
   const slideVariants: Variants = {
     enter: (dir: "left" | "right") => ({
-      x: prefersReducedMotion ? 0 : dir === "right" ? 24 : -24,
+      x: prefersReducedMotion ? 0 : dir === "right" ? 18 : -18,
       opacity: 0,
     }),
     center: {
@@ -133,10 +159,10 @@ export function TestimonialsSection() {
       },
     },
     exit: (dir: "left" | "right") => ({
-      x: prefersReducedMotion ? 0 : dir === "right" ? -24 : 24,
+      x: prefersReducedMotion ? 0 : dir === "right" ? -18 : 18,
       opacity: 0,
       transition: {
-        duration: prefersReducedMotion ? 0.15 : 0.3,
+        duration: prefersReducedMotion ? 0.15 : 0.28,
         ease: cinematicEase,
       },
     }),
@@ -178,10 +204,17 @@ export function TestimonialsSection() {
         {/* ================================================================ */}
         <div
           className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center max-w-6xl mx-auto"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onFocus={() => setIsPaused(true)}
-          onBlur={() => setIsPaused(false)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => {
+            setIsHovered(false)
+            markInteraction()
+          }}
+          onClick={markInteraction}
+          onFocusCapture={() => setIsHovered(true)}
+          onBlurCapture={() => {
+            setIsHovered(false)
+            markInteraction()
+          }}
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >

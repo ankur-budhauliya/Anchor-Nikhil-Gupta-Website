@@ -28,15 +28,29 @@ import {
 import { Button } from "@/components/ui/button"
 import { VideoLightbox } from "@/components/ui/video-lightbox"
 
+const AUTOPLAY_INTERVAL_MS = 5500
+const RESUME_DELAY_MS = 5500
+
 export default function TestimonialsPage() {
   const prefersReducedMotion = useReducedMotion() ?? false
 
   // Written Testimonial Carousel State
   const [currentIndex, setCurrentIndex] = React.useState(0)
   const [direction, setDirection] = React.useState<"left" | "right">("right")
-  const [isPaused, setIsPaused] = React.useState(false)
-  const resumeTimerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const [isHovered, setIsHovered] = React.useState(false)
+  const [isInteracting, setIsInteracting] = React.useState(false)
+
   const totalWritten = writtenTestimonialsData.length
+  const resumeTimerRef = React.useRef<NodeJS.Timeout | null>(null)
+  const rotationTimerRef = React.useRef<NodeJS.Timeout | null>(null)
+
+  // Clear timers safely on unmount
+  React.useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+      if (rotationTimerRef.current) clearTimeout(rotationTimerRef.current)
+    }
+  }, [])
 
   const handleNextWritten = React.useCallback(() => {
     setDirection("right")
@@ -48,46 +62,54 @@ export default function TestimonialsPage() {
     setCurrentIndex((prev) => (prev - 1 + totalWritten) % totalWritten)
   }, [totalWritten])
 
-  const pauseAndResumeAfter = React.useCallback((delayMs = 7000) => {
-    setIsPaused(true)
+  const markInteraction = React.useCallback(() => {
+    setIsInteracting(true)
     if (resumeTimerRef.current) {
       clearTimeout(resumeTimerRef.current)
     }
     resumeTimerRef.current = setTimeout(() => {
-      setIsPaused(false)
-    }, delayMs)
+      setIsInteracting(false)
+    }, RESUME_DELAY_MS)
   }, [])
 
   const onManualNext = () => {
     handleNextWritten()
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
   const onManualPrev = () => {
     handlePrevWritten()
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
   const onSelectIndex = (idx: number) => {
+    if (idx === currentIndex) return
     setDirection(idx > currentIndex ? "right" : "left")
     setCurrentIndex(idx)
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
   // 5.5s autoplay rotation
   React.useEffect(() => {
-    if (isPaused) return
-    const timer = setInterval(() => {
-      handleNextWritten()
-    }, 5500)
-    return () => clearInterval(timer)
-  }, [isPaused, handleNextWritten])
-
-  React.useEffect(() => {
-    return () => {
-      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current)
+    if (isHovered || isInteracting) {
+      if (rotationTimerRef.current) {
+        clearTimeout(rotationTimerRef.current)
+        rotationTimerRef.current = null
+      }
+      return
     }
-  }, [])
+
+    rotationTimerRef.current = setTimeout(() => {
+      handleNextWritten()
+    }, AUTOPLAY_INTERVAL_MS)
+
+    return () => {
+      if (rotationTimerRef.current) {
+        clearTimeout(rotationTimerRef.current)
+        rotationTimerRef.current = null
+      }
+    }
+  }, [currentIndex, isHovered, isInteracting, handleNextWritten])
 
   // Touch Swipe Handlers
   const touchStartX = React.useRef<number | null>(null)
@@ -96,7 +118,7 @@ export default function TestimonialsPage() {
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
     touchStartY.current = e.touches[0].clientY
-    setIsPaused(true)
+    markInteraction()
   }
 
   const handleTouchEnd = (e: React.TouchEvent) => {
@@ -116,7 +138,7 @@ export default function TestimonialsPage() {
     }
     touchStartX.current = null
     touchStartY.current = null
-    pauseAndResumeAfter(7000)
+    markInteraction()
   }
 
   const currentWritten: WrittenTestimonial = writtenTestimonialsData[currentIndex]
@@ -187,10 +209,17 @@ export default function TestimonialsPage() {
           <div className="mb-20 sm:mb-24">
               <div
                 className="rounded-3xl bg-white border border-neutral-200 shadow-sm p-6 sm:p-10 lg:p-12"
-                onMouseEnter={() => setIsPaused(true)}
-                onMouseLeave={() => setIsPaused(false)}
-                onFocus={() => setIsPaused(true)}
-                onBlur={() => setIsPaused(false)}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => {
+                  setIsHovered(false)
+                  markInteraction()
+                }}
+                onClick={markInteraction}
+                onFocusCapture={() => setIsHovered(true)}
+                onBlurCapture={() => {
+                  setIsHovered(false)
+                  markInteraction()
+                }}
                 onTouchStart={handleTouchStart}
                 onTouchEnd={handleTouchEnd}
               >
